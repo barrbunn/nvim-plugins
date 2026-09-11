@@ -1,49 +1,38 @@
 return {
-	-- Mason LSP Manager
+	-- Mason: installs and manages LSP servers, formatters, linters, etc.
 	{
 		"mason-org/mason.nvim",
 		config = function()
 			require("mason").setup()
 		end,
 	},
-	-- Mason LSP Config
+
+	-- Mason LSP Config: installs the servers listed below and auto-enables
+	-- them via `vim.lsp.enable()` (automatic_enable defaults to true).
 	{
 		"mason-org/mason-lspconfig.nvim",
-
 		dependencies = {
 			"mason-org/mason.nvim",
 			"neovim/nvim-lspconfig",
 		},
-
 		config = function()
 			require("mason-lspconfig").setup({
-				automatic_installation = true
+				ensure_installed = {
+					"pyright",
+					"lua_ls",
+					"bashls",
+					"jsonls",
+					"yamlls",
+					"clangd",
+					"terraformls",
+					"dockerls",
+					"docker_compose_language_service",
+					"gopls",
+					"ts_ls",
+					"rust_analyzer",
+					"pbls",
+				},
 			})
 		end,
-
-		vim.lsp.enable({
-			"pyright",
-			"pyrefly",
-			"lua_ls",
-			"bashls",
-			"jsonls",
-			"yamlls",
-			"clangd",
-			"jq",
-			"terraformls",
-			"dockerls",
-			"docker_language_server",
-			"docker_compose_language_server",
-			"gopls",
-			"gotests",
-			"goimports",
-			"go-debug-adapter",
-			"typescript-language-server",
-			"rust-analyzer",
-			"chrome-debug-adapter",
-			"pbls"
-		}),
-
-		vim.diagnostic.config({ virtual_text = true })
 	},
 }

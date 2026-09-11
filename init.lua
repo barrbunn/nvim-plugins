@@ -14,12 +14,20 @@ vim.opt.rtp:prepend(lazypath)
 
 -- 2. Set your leader key (important to do before loading plugins)
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- 3. Setup lazy.nvim and add your plugins
 require("lazy").setup({
   spec = {
-    { "folke/which-key.nvim" },
-    { "folke/tokyonight.nvim" },
+    { "folke/which-key.nvim", event = "VeryLazy" },
+    {
+      "folke/tokyonight.nvim",
+      lazy = false,
+      priority = 1000,
+      config = function()
+        vim.cmd.colorscheme("tokyonight")
+      end,
+    },
     { import = "plugins.telescope" },
     { import = "plugins.lsp-setup" },
     { import = "plugins.treesitter" },
@@ -29,9 +37,6 @@ require("lazy").setup({
   -- Optional: Configure lazy.nvim settings
   checker = { enabled = true }, -- automatically check for plugin updates
 })
-
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
 vim.opt.number = true
 vim.opt.relativenumber = true

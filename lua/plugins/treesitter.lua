@@ -63,7 +63,7 @@ return {
 			local ts_move = require("nvim-treesitter-textobjects.move")
 
 			local select_maps = {
-				["af"] = "@functoin.outer",
+				["af"] = "@function.outer",
 				["if"] = "@function.inner",
 				["ac"] = "@class.outer",
 				["ic"] = "@class.inner",
